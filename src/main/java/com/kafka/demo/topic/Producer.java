@@ -13,19 +13,19 @@ import org.springframework.stereotype.Service;
 public class Producer {
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, BeerOrder> kafkaTemplate;
 
     private final String TOPIC;
 
-    public Producer(KafkaTemplate<String, String> kafkaTemplate,
+    public Producer(KafkaTemplate<String, BeerOrder> kafkaTemplate,
                     @Value("${beerOrder.topic-name}") String TOPIC) {
         this.kafkaTemplate = kafkaTemplate;
         this.TOPIC = TOPIC;
     }
 
-    public void sendMessage(String message) {
-        logger.info(String.format("#### -> Producing message -> %s", message));
-        this.kafkaTemplate.send(TOPIC, message);
+    public void sendMessage(BeerOrder beerOrder) {
+        logger.info(String.format("#### -> Producing message of order -> %s", beerOrder.getIdOrder()));
+        this.kafkaTemplate.send(TOPIC, beerOrder);
     }
 
 
