@@ -10,9 +10,7 @@ public class KafkaDemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KafkaDemoApplication.class, args);
 	}
-
-	//TODO: Configurar multiplos consumers
-	//TODO: Adicionar teste
+	
 
 
 
