@@ -12,3 +12,19 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  redpanda:
+    image: vectorized/redpanda
+    container_name: redpanda
+    networks:
+      - broker-redpanda
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+    environment:
+      - KAFKA_BROKERS=kafka:29092
+networks:
+  broker-redpanda:
+    driver: bridge
+
